@@ -1,6 +1,6 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from crewai.agents.agent_builder.base_agent import BaseAgent
+from crewai.agent import BaseAgent
 from typing import List
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -17,17 +17,17 @@ class InterviewCrew():
 
     # === Agents ===
     @agent
-    def interview_manager_agent(self) -> Agent:
+    def interview_manager(self) -> Agent:
         return Agent(
-            config=self.agents_config['interview_manager_agent'], # type: ignore[index]
+            config=self.agents_config['interview_manager'], # type: ignore[index]
             tools=[web_search_tool],
             verbose=True
         )
 
     @agent
-    def question_generator_agent(self) -> Agent:
+    def question_generator(self) -> Agent:
         return Agent(
-            config=self.agents_config['question_generator_agent'], # type: ignore[index]
+            config=self.agents_config['question_generator'], # type: ignore[index]
             tools=[web_search_tool],
             verbose=True
         )
@@ -40,23 +40,23 @@ class InterviewCrew():
         )
 
     @agent
-    def response_evaluator_agent(self) -> Agent:
+    def response_evaluator(self) -> Agent:
         return Agent(
-            config=self.agents_config['response_evaluator_agent'], # type: ignore[index]
+            config=self.agents_config['response_evaluator'], # type: ignore[index]
             verbose=True
         )
 
     @agent
-    def feedback_coach_agent(self) -> Agent:
+    def feedback_coach(self) -> Agent:
         return Agent(
-            config=self.agents_config['feedback_coach_agent'], # type: ignore[index]
+            config=self.agents_config['feedback_coach'], # type: ignore[index]
             verbose=True
         )
 
     @agent
-    def report_generator_agent(self) -> Agent:
+    def report_generator(self) -> Agent:
         return Agent(
-            config=self.agents_config['report_generator_agent'], # type: ignore[index]
+            config=self.agents_config['report_generator'], # type: ignore[index]
             tools=[save_to_memory],
             verbose=True
         )
@@ -70,9 +70,9 @@ class InterviewCrew():
         )
 
     @agent
-    def coordinator_agent(self) -> Agent:
+    def coordinator(self) -> Agent:
         return Agent(
-            config=self.agents_config['coordinator_agent'], # type: ignore[index]
+            config=self.agents_config['coordinator'], # type: ignore[index]
             verbose=True
         )
 
