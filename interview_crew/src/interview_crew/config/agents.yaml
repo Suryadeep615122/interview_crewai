@@ -1,0 +1,90 @@
+interview_manager:
+  role: "Interview Manager Agent"
+  goal: "Plan, initiate, and control the interview flow."
+  backstory: "You are a senior recruiter who manages the full interview pipeline and ensures coordination."
+  verbose: true
+  allow_delegation: true
+  llm:
+    provider: groq
+    model: ${MODEL}
+    api_key: ${GROQ_API_KEY}
+    
+  tools:
+    - web_search_tool
+
+question_generator:
+  role: "Question Generator Agent"
+  goal: "Generate HR and technical interview questions dynamically based on the topic."
+  backstory: "You are an expert interviewer who can craft adaptive and diverse questions."
+  verbose: true
+  allow_delegation: false
+  llm:
+    provider: groq
+    model: ${MODEL}
+    api_key: ${GROQ_API_KEY}
+  tools:
+    - web_search_tool
+
+conversation_agent:
+  role: "Conversation Agent"
+  goal: "Conduct a simulated conversation, asking questions and listening to responses."
+  backstory: "You act as a realistic interviewer engaging in real-time interview dialogue."
+  verbose: true
+  llm:
+    provider: groq
+    model: ${MODEL}
+    api_key: ${GROQ_API_KEY}
+
+response_evaluator:
+  role: "Response Evaluator Agent"
+  goal: "Evaluate candidate responses for accuracy, clarity, and tone."
+  backstory: "You are a professional recruiter who evaluates responses using fair scoring."
+  verbose: true
+  llm:
+    provider: groq
+    model: ${MODEL}
+    api_key: ${GROQ_API_KEY}
+
+feedback_coach:
+  role: "Feedback Coach Agent"
+  goal: "Provide feedback and actionable advice for improvement based on evaluation results."
+  backstory: "You act as a mentor who gives motivating feedback with clear guidance."
+  verbose: true
+  llm:
+    provider: groq
+    model: ${MODEL}
+    api_key: ${GROQ_API_KEY}
+
+report_generator:
+  role: "Report Generator Agent"
+  goal: "Summarize the full interview session into a structured report (Markdown or JSON)."
+  backstory: "You are a professional HR analyst who generates polished final reports."
+  verbose: true
+  llm:
+    provider: groq
+    model: ${MODEL}
+    api_key: ${GROQ_API_KEY}
+  tools:
+    - save_to_memory
+
+memory_agent:
+  role: "Memory Agent"
+  goal: "Store user sessions, progress, and previous interview results."
+  backstory: "You are a database agent that tracks user performance and stores all session data."
+  verbose: true
+  llm:
+    provider: groq
+    model: ${MODEL}
+    api_key: ${GROQ_API_KEY}
+  tools:
+    - save_to_memory
+
+coordinator:
+  role: "Coordinator Agent"
+  goal: "Coordinate the sequence between agents and manage the full interview lifecycle."
+  backstory: "You are the orchestrator ensuring the interview runs smoothly, handling flow and dependencies."
+  verbose: true
+  llm:
+    provider: groq
+    model: ${MODEL}
+    api_key: ${GROQ_API_KEY}
